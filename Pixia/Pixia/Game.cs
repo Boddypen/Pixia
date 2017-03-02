@@ -21,7 +21,7 @@ namespace Pixia
 		// Static Game Stuff
 		public static readonly String
 			GAMENAME = "Pixia",
-			GAMEVERSION = "Dev 0.0.1";
+			GAMEVERSION = "0.1";
 
 		// XNA
 		public GraphicsDeviceManager graphics;
