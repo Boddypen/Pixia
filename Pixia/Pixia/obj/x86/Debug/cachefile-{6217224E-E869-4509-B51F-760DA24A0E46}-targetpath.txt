@@ -1,0 +1,10 @@
+Content\spritefont\ui.xnb
+Content\png\main.xnb
+Content\png\cursor.xnb
+Content\wav\place.xnb
+Content\wav\break.xnb
+Content\wav\pause.xnb
+Content\wav\spawn.xnb
+Content\wav\focus.xnb
+Content\wav\close.xnb
+Content\wav\open.xnb
