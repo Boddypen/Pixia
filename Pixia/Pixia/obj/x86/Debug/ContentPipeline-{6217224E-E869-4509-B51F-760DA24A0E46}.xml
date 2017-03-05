@@ -7,8 +7,8 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>B:\Games\Development\Pixia\Pixia\bin\x86\Debug\Content\spritefont\ui.xnb</Output>
-      <Time>2017-02-21T19:54:25.7060011+11:00</Time>
+      <Output>B:\Documents\Git\Pixia\Pixia\Pixia\bin\x86\Debug\Content\spritefont\ui.xnb</Output>
+      <Time>2017-03-02T17:59:58.4640051+11:00</Time>
     </Item>
     <Item>
       <Source>png\main.png</Source>
@@ -16,8 +16,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>B:\Games\Development\Pixia\Pixia\bin\x86\Debug\Content\png\main.xnb</Output>
-      <Time>2017-02-25T12:47:01.0455013+11:00</Time>
+      <Output>B:\Documents\Git\Pixia\Pixia\Pixia\bin\x86\Debug\Content\png\main.xnb</Output>
+      <Time>2017-03-02T17:59:58.4630051+11:00</Time>
     </Item>
     <Item>
       <Source>png\cursor.png</Source>
@@ -25,8 +25,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>B:\Games\Development\Pixia\Pixia\bin\x86\Debug\Content\png\cursor.xnb</Output>
-      <Time>2017-02-22T22:42:53.0392008+11:00</Time>
+      <Output>B:\Documents\Git\Pixia\Pixia\Pixia\bin\x86\Debug\Content\png\cursor.xnb</Output>
+      <Time>2017-03-02T17:59:58.4630051+11:00</Time>
     </Item>
     <Item>
       <Source>wav\place.wav</Source>
@@ -34,8 +34,8 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
-      <Output>B:\Games\Development\Pixia\Pixia\bin\x86\Debug\Content\wav\place.xnb</Output>
-      <Time>2017-02-23T01:54:49.8302008+11:00</Time>
+      <Output>B:\Documents\Git\Pixia\Pixia\Pixia\bin\x86\Debug\Content\wav\place.xnb</Output>
+      <Time>2017-03-02T17:59:58.4690051+11:00</Time>
     </Item>
     <Item>
       <Source>wav\break.wav</Source>
@@ -43,8 +43,8 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
-      <Output>B:\Games\Development\Pixia\Pixia\bin\x86\Debug\Content\wav\break.xnb</Output>
-      <Time>2017-02-23T18:56:21.7494506+11:00</Time>
+      <Output>B:\Documents\Git\Pixia\Pixia\Pixia\bin\x86\Debug\Content\wav\break.xnb</Output>
+      <Time>2017-03-02T17:59:58.4640051+11:00</Time>
     </Item>
     <Item>
       <Source>wav\pause.wav</Source>
@@ -52,8 +52,8 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
-      <Output>B:\Games\Development\Pixia\Pixia\bin\x86\Debug\Content\wav\pause.xnb</Output>
-      <Time>2017-02-23T21:12:49.6112614+11:00</Time>
+      <Output>B:\Documents\Git\Pixia\Pixia\Pixia\bin\x86\Debug\Content\wav\pause.xnb</Output>
+      <Time>2017-03-02T17:59:58.4680051+11:00</Time>
     </Item>
     <Item>
       <Source>wav\spawn.wav</Source>
@@ -61,8 +61,8 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
-      <Output>B:\Games\Development\Pixia\Pixia\bin\x86\Debug\Content\wav\spawn.xnb</Output>
-      <Time>2017-02-23T21:14:51.6492614+11:00</Time>
+      <Output>B:\Documents\Git\Pixia\Pixia\Pixia\bin\x86\Debug\Content\wav\spawn.xnb</Output>
+      <Time>2017-03-02T17:59:58.4700051+11:00</Time>
     </Item>
     <Item>
       <Source>wav\focus.wav</Source>
@@ -70,8 +70,8 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
-      <Output>B:\Games\Development\Pixia\Pixia\bin\x86\Debug\Content\wav\focus.xnb</Output>
-      <Time>2017-02-23T21:23:38.7372614+11:00</Time>
+      <Output>B:\Documents\Git\Pixia\Pixia\Pixia\bin\x86\Debug\Content\wav\focus.xnb</Output>
+      <Time>2017-03-02T17:59:58.4660051+11:00</Time>
     </Item>
     <Item>
       <Source>wav\close.wav</Source>
@@ -79,8 +79,8 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
-      <Output>B:\Games\Development\Pixia\Pixia\bin\x86\Debug\Content\wav\close.xnb</Output>
-      <Time>2017-02-24T21:43:43.774+11:00</Time>
+      <Output>B:\Documents\Git\Pixia\Pixia\Pixia\bin\x86\Debug\Content\wav\close.xnb</Output>
+      <Time>2017-03-02T17:59:58.4650051+11:00</Time>
     </Item>
     <Item>
       <Source>wav\open.wav</Source>
@@ -88,8 +88,8 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
-      <Output>B:\Games\Development\Pixia\Pixia\bin\x86\Debug\Content\wav\open.xnb</Output>
-      <Time>2017-02-24T21:43:38.381+11:00</Time>
+      <Output>B:\Documents\Git\Pixia\Pixia\Pixia\bin\x86\Debug\Content\wav\open.xnb</Output>
+      <Time>2017-03-02T17:59:58.4670051+11:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -98,10 +98,10 @@
       <TargetProfile>Reach</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>B:\Games\Development\Pixia\PixiaContent\</RootDirectory>
-      <LoggerRootDirectory>B:\Games\Development\Pixia\Pixia\</LoggerRootDirectory>
-      <IntermediateDirectory>B:\Games\Development\Pixia\Pixia\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>B:\Games\Development\Pixia\Pixia\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>B:\Documents\Git\Pixia\Pixia\PixiaContent\</RootDirectory>
+      <LoggerRootDirectory>B:\Documents\Git\Pixia\Pixia\Pixia\</LoggerRootDirectory>
+      <IntermediateDirectory>B:\Documents\Git\Pixia\Pixia\Pixia\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>B:\Documents\Git\Pixia\Pixia\Pixia\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>

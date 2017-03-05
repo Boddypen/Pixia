@@ -1,1 +1,2 @@
 B:\Games\Development\Pixia\PixiaContent\obj\x86\Debug\PixiaContent.contentprojResolveAssemblyReference.cache
+B:\Documents\Git\Pixia\Pixia\PixiaContent\obj\x86\Debug\PixiaContent.contentprojResolveAssemblyReference.cache
