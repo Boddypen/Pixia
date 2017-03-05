@@ -26,6 +26,8 @@ namespace Pixia.Entities
 		public int age;
 		public Resource dropResource;
 
+		public int onGround = 0;
+
 		public Entity()
 		{
 			this.position = new Vector2(0.0F, 0.0F);
@@ -53,21 +55,41 @@ namespace Pixia.Entities
 		private void move(Level level)
 		{
 			// Change this to a lower value if the AABB is lagging
-			int collisionExpanse = 16;
+			int collisionExpanse = 8;
 
 			// First, get the entity's rectangle for use in AABB
-			Vector4 entityRectangle = new Vector4(position.X, position.Y, size.X, size.Y);
+			Vector4
+				entityRectangle = new Vector4(position.X,
+											  position.Y,
+											  size.X,
+											  size.Y),
+
+			// Create the rectangle of the entity one step into the future
+				futureRectangle = new Vector4(position.X + velocity.X,
+											  position.Y + velocity.Y,
+											  size.X,
+											  size.Y);
 
 			// Now find out all the nearby tiles of the entity
 			Rectangle nearby = level.getLocalBoundary(position,
 													 (int)size.X * collisionExpanse,
 													 (int)size.Y * collisionExpanse);
-			
+
 			#region AABB
 
-			Boolean collidesHorizontal = false;
-			Boolean collidesVertical = false;
-			
+			// Collision Booleans
+			Boolean
+				collides = false,
+				collidesHorizontal = false,
+				collidesVertical = false;
+
+			// Collision Normals
+			Vector2
+				horizontalNormal = Vector2.Zero, // X = X Position, Y = Width
+				verticalNormal = Vector2.Zero; // X = Y Position, Y = Width
+
+			Vector2 newPosition = position;
+
 			// Go through all nearby tiles to find out if the entity will collide or not
             for (int x = nearby.X; x < nearby.X + nearby.Width; x++)
 			{
@@ -75,59 +97,110 @@ namespace Pixia.Entities
 				{
 					if (level.getTile(x, y).isSolid())
 					{
+						// Create a temporary variable to hold the tile position data
+						Vector4 tileVector4
+							= new Vector4(x * Tile.tileWidth,
+										  y * Tile.tileHeight,
+										  Tile.tileWidth,
+                                          Tile.tileHeight);
+
 						// Check if the entity collides with the tile
-						if (floatCollides(entityRectangle + new Vector4(velocity.X, 0, 0, 0),
-							new Vector4(x * Tile.tileWidth,
-										y * Tile.tileHeight,
-										Tile.tileWidth,
-										Tile.tileHeight)))
+						if (floatCollides(futureRectangle, tileVector4))
+							collides = true;
+
+						// .. horizontally
+						if (floatCollides(entityRectangle + new Vector4(velocity.X, 0, 0, 0), tileVector4))
+						{
 							collidesHorizontal = true;
 
-						if (floatCollides(entityRectangle + new Vector4(0, velocity.Y, 0, 0),
-							new Vector4(x * Tile.tileWidth,
-										y * Tile.tileHeight,
-										Tile.tileWidth,
-										Tile.tileHeight)))
+							// Set the normal, so the player can 'snap' onto the tile
+							horizontalNormal.X = x * Tile.tileWidth;
+							horizontalNormal.Y = Tile.tileWidth;
+						}
+
+						// .. vertically
+						if (floatCollides(entityRectangle + new Vector4(0, velocity.Y, 0, 0), tileVector4))
+						{
 							collidesVertical = true;
+
+							// Again, set the normal
+							verticalNormal.X = y * Tile.tileHeight;
+							verticalNormal.Y = Tile.tileHeight;
+						}
 					}
 				}
             }
 
-			// Create the rectangle of the entity one step into the future
-			Vector4 future = new Vector4(entityRectangle.X + velocity.X,
-										 entityRectangle.Y + velocity.Y,
-										 entityRectangle.W,
-										 entityRectangle.Z);
-			/*
-			if (collidesHorizontal && !collidesVertical)
-			{
-				if (velocity.X > 0)
-					position.X = ((int)Math.Ceiling(position.X / Tile.tileWidth) * Tile.tileWidth) - size.X;
-				else
-					position.X = ((int)Math.Floor(position.X / Tile.tileWidth) * Tile.tileWidth);
+			// Find out if the entity is on the ground
+			if (onGround > 0) onGround--;
 
-				velocity.X = 0;
-			}
-			if (collidesVertical && !collidesHorizontal)
+			// If the player has collided with something, find out the normal of the tile
+			if (collides)
 			{
-				if (velocity.Y > 0)
-					position.Y = (int)Math.Floor(position.Y / Tile.tileHeight) * Tile.tileHeight;
-				else
-					position.Y = (int)Math.Ceiling(position.Y / Tile.tileHeight) * Tile.tileHeight;
+				if(collidesHorizontal)
+				{
+					if(velocity.X < 0.0F)
+					{
+						// Moving to the left
 
-				velocity.Y = 0;
+						// Snap the player onto the tile
+						newPosition.X = horizontalNormal.X + horizontalNormal.Y;
+
+						// Stop moving the player horizontally
+						velocity.X = 0.0F;
+					}
+					else if(velocity.X > 0.0F)
+					{
+						// Moving to the right
+
+						// Snap the player onto the tile
+						newPosition.X = horizontalNormal.X - size.X;
+
+						// Stop moving the player horizontally
+						velocity.X = 0.0F;
+					}
+				}
+				
+				if(collidesVertical)
+				{
+					if (velocity.Y < 0.0F)
+					{
+						// Moving up
+
+						// Snap the player onto the ceiling
+						newPosition.Y = verticalNormal.X + verticalNormal.Y;
+
+						// Stop moving the player vertically
+						velocity.Y = 0.0F;
+					}
+					else if(velocity.Y > 0.0F)
+					{
+						// Moving down
+
+						// Snap the entity onto the floor
+						newPosition.Y = verticalNormal.X - size.Y;
+
+						// Stop moving the entity downward
+						velocity.Y = 0.0F;
+
+						onGround = 3;
+					}
+				}
+
+				position = newPosition;
 			}
-			if (collidesHorizontal && collidesVertical)
-			{
-				velocity = Vector2.Zero;
-			}
-			if (!collidesVertical && !collidesHorizontal)
-			{
-				position += velocity;
-			}
-			*/
 
 			#endregion
+
+			// Move the entity
+			position += velocity;
+			velocity.Y += level.gravity;
+
+			// Slow the entity down if it's on the ground
+			if (onGround > 0)
+				velocity.X *= 0.8F;
+			else
+				velocity.X *= 0.97F;
 		}
 
 		/// <summary>
@@ -153,18 +226,25 @@ namespace Pixia.Entities
 		/// <returns></returns>
 		private Boolean floatCollides(Vector4 first, Vector4 second)
 		{
-			return !(second.X > first.X + first.W
-				  || second.X + second.W < first.X
-				  || second.Y > first.Y + first.Z
-				  || second.Y + first.Z < first.Y);
+			//first.X += first.Z / 2.0F;
+			//first.Y += first.W / 2.0F;
 
-			//return (Math.Abs(first.X - second.X) * 2 < (first.W + second.W))
-			//	&& (Math.Abs(first.Y - second.Y) * 2 < (first.Z + second.Z));
+			//first.Z /= 2.0F;
+			//first.W /= 2.0F;
 
-			//return !(first.X > second.X + second.W
-			//	  || first.X + first.W < second.X
-			//	  || first.Y > second.Y + second.Z
-			//	  || first.Y + first.Z < second.Y);
+			//if (Math.Abs(first.X - second.X) < first.Z + second.Z)
+			//	if (Math.Abs(first.Y - second.Y) < first.W + second.W)
+			//		return true; return false;
+			
+			Rectangle firstR  = new Rectangle((int)first.X, (int)first.Y, (int)first.Z, (int)first.W);
+			Rectangle secondR = new Rectangle((int)second.X, (int)second.Y, (int)second.Z, (int)second.W);
+
+			return firstR.Intersects(secondR);
+
+			//return !(second.X > first.X + first.W
+			//	  || second.X + second.W < first.X
+			//	  || second.Y > first.Y + first.Z
+			//	  || second.Y + first.Z < first.Y);
 		}
 
 		/// <summary>
@@ -176,7 +256,6 @@ namespace Pixia.Entities
 		{
 			// Move the entity
 			this.move(level);
-			velocity.Y += level.gravity;
 
 			// Increase the entity's age
 			age++;
@@ -196,13 +275,20 @@ namespace Pixia.Entities
 		public virtual Boolean update(Level level, KeyboardState k, KeyboardState kOld, MouseState m, MouseState mOld)
 		{
 			// Change the velocity based on the keyboard input
-			if (k.IsKeyDown(Keys.A)) velocity.X -= 0.5F;
-			if (k.IsKeyDown(Keys.D)) velocity.X += 0.5F;
-			if (k.IsKeyDown(Keys.Space) && kOld.IsKeyUp(Keys.Space)) velocity.Y -= 1.0F;
+			if (onGround > 0)
+			{
+				if (k.IsKeyDown(Keys.A)) velocity.X -= 0.5F;
+				if (k.IsKeyDown(Keys.D)) velocity.X += 0.5F;
+			}
+			else
+			{
+				if (k.IsKeyDown(Keys.A)) velocity.X -= 0.15F;
+				if (k.IsKeyDown(Keys.D)) velocity.X += 0.15F;
+			}
+			if (k.IsKeyDown(Keys.Space) && kOld.IsKeyUp(Keys.Space) && onGround > 0) velocity.Y -= 5.0F;
 
 			// Move the entity
 			this.move(level);
-			velocity.Y += level.gravity;
 
 			// Increase the entity's age
 			age++;

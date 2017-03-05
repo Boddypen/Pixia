@@ -22,7 +22,7 @@ namespace Pixia
 		public static readonly String
 			GAMENAME = "Pixia",
 			GAMEVERSION = "0.1";
-
+		
 		// XNA
 		public GraphicsDeviceManager graphics;
 		public SpriteBatch spriteBatch;
@@ -172,7 +172,7 @@ namespace Pixia
 			inventoryY = (graphics.PreferredBackBufferHeight / (2 * scale)) - ((inventoryHeight * Tile.tileHeight) / 2);
 
 			// Create a player for the game level
-			playerSize = new Vector2(16, 24);
+			playerSize = new Vector2(36, 64);
 
 			// Timers
 			frameTimer = new System.Timers.Timer(1000);
@@ -728,6 +728,10 @@ namespace Pixia
 				drawShadowString(spriteBatch,
 					uiFont, "IS: " + inventorySelectionX + ", " + inventorySelectionY,
 					new Vector2(5, 85),
+					Color.White);
+				drawShadowString(spriteBatch,
+					uiFont, "OG: " + (level.player.onGround > 0),
+					new Vector2(5, 105),
 					Color.White);
 			}
 

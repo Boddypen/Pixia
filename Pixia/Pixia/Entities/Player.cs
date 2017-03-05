@@ -33,6 +33,19 @@ namespace Pixia.Entities
 		{
 			spriteBatch.Draw(sheet,
 				new Rectangle(
+					0,
+					0,
+					(int)size.X,
+					(int)size.Y),
+				new Rectangle(
+					112,
+					0,
+					16,
+					16),
+				Color.White);
+
+			spriteBatch.Draw(sheet,
+				new Rectangle(
 					(int)position.X + displacementX - (int)cameraPosition.X,
 					(int)position.Y + displacementY - (int)cameraPosition.Y,
 					(int)size.X,
